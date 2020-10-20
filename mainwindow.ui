@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>899</width>
+    <height>765</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QLabel {
+	color:white;
+	font-size:12px;
+}
+
+QLabel::disabled{
+	color: rgb(171, 171, 171);
+	font-size:12px;
+}
+QCheckBox {
+	color:white;
+	font-weight:500;
+}
+QCheckBox::indicator:unchecked {
+	background-color:rgb(255, 255, 255);
+	border: 2px solid rgb(45, 45, 45);
+	border-radius: 3px;
+	width: 11px;
+	height: 11px;
+}
+
+QCheckBox::indicator:checked {
+	background-color:rgb(50, 167, 24);
+	border: 2px solid rgb(45, 45, 45);
+	border-radius: 3px;
+	width: 11px;
+	height: 11px;
+}
+
+QCheckBox::disabled {
+	color:rgb(171, 171, 171);
+}
+QPushButton {
+	background-color: rgb(30, 30, 30);
+	border: 1px solid rgb(85, 150, 255);
+	color: rgb(85, 150, 255);
+	padding: 4px 10px;
+	font: 75 10pt &quot;Segoe UI&quot;;
+	font-weight: 500;
+}
+QPushButton::hover {
+	background-color: rgb(85, 150, 255);
+	border: 1px solid rgb(30, 30, 30);
+	font: 75 10pt &quot;Segoe UI&quot;;
+	color: rgb(30, 30, 30);
+	border-radius:5px;
+	font-weight: 500;
+}
+
+QPushButton::disabled {
+	color:rgb(30, 47, 103);
+	background-color:rgb(85, 106, 132);
+	border: 1px solid rgb(7, 23, 59);
+	border-radius: 10px;
+	font-size: 14px;
+}
+
+QLineEdit::disabled {
+	background-color: rgb(181, 181, 181);
+}
+QLineEdit::enabled {
+	font-size: 11px;
+	padding: 5px 10px;
+	border: 1px solid rgb(80, 80, 80);
+	border-radius: 4px;
+	background-color:  rgb(60,60,60);
+	color: rgb(200, 200, 200);
+}
+
+QLineEdit::hover {
+	border: 1px solid rgb(120, 120, 120);
+	border-radius: 4px;
+	background-color:  rgb(80,80,80);
+}
+
+QLineEdit::focus {
+	border: 1px solid rgb(100, 100, 100);
+	border-radius: 4px;
+	background-color:  rgb(70,70,70);
+}
+
+#widget_2 {
+	background-color: rgb(47, 47, 47);
+}
+
+#centralwidget{
+	background-color: rgb(42, 42, 42);
+}
+
+</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,10">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item alignment="Qt::AlignHCenter|Qt::AlignTop">
+     <widget class="QWidget" name="widget" native="true">
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="spacing">
+        <number>10</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>10</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>10</number>
+       </property>
+       <item>
+        <widget class="QPushButton" name="serialPortBtn">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>48</width>
+           <height>48</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>48</width>
+           <height>48</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>SP</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="graphBtn">
+         <property name="minimumSize">
+          <size>
+           <width>48</width>
+           <height>48</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>48</width>
+           <height>48</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>#F</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="motorsBtn">
+         <property name="minimumSize">
+          <size>
+           <width>48</width>
+           <height>48</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>48</width>
+           <height>48</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>MTS</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="saveBtn">
+         <property name="minimumSize">
+          <size>
+           <width>48</width>
+           <height>48</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>48</width>
+           <height>48</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Save</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="widget_2" native="true">
+      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="20,1">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QWidget" name="widget_4" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QScrollArea { background: transparent; border:0; }
+QScrollArea &gt; QWidget &gt; QWidget { background: transparent; border:0;}
+QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); border:0;}</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item alignment="Qt::AlignTop">
+           <widget class="QWidget" name="settingsWidget" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>100</height>
+             </size>
+            </property>
+            <layout class="QVBoxLayout" name="settingsLayout">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QScrollArea" name="scrollArea">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>670</height>
+                </size>
+               </property>
+               <property name="widgetResizable">
+                <bool>true</bool>
+               </property>
+               <widget class="QWidget" name="settingsContentWidget">
+                <property name="geometry">
+                 <rect>
+                  <x>0</x>
+                  <y>0</y>
+                  <width>397</width>
+                  <height>670</height>
+                 </rect>
+                </property>
+                <layout class="QVBoxLayout" name="settingsContentLayout"/>
+               </widget>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignTop">
+           <widget class="QWidget" name="settingsWidget2" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>100</height>
+             </size>
+            </property>
+            <layout class="QVBoxLayout" name="settingsLayout2">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QScrollArea" name="scrollArea_2">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>600</height>
+                </size>
+               </property>
+               <property name="widgetResizable">
+                <bool>true</bool>
+               </property>
+               <widget class="QWidget" name="settingsContentWidget2">
+                <property name="geometry">
+                 <rect>
+                  <x>0</x>
+                  <y>0</y>
+                  <width>396</width>
+                  <height>600</height>
+                 </rect>
+                </property>
+                <layout class="QVBoxLayout" name="settingsContentLayout2"/>
+               </widget>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item alignment="Qt::AlignRight">
+        <widget class="SerialConnection" name="serialConnectionWidget" native="true"/>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>899</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>SerialConnection</class>
+   <extends>QWidget</extends>
+   <header location="global">serialconnection.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
