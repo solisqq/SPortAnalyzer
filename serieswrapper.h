@@ -25,6 +25,7 @@ public:
     void add(qreal y);
     void setChart(QtCharts::QChart& chart);
     void setColour(const QColor &color);
+    void resizeToFitFFT();
 public slots:
     void show(QtCharts::QChart* chart);
     void hide(QtCharts::QChart *chart);
@@ -33,6 +34,7 @@ public slots:
     void setState(int state);
 private:
     qreal getCurrentX();
+    void recalcLimits();
 };
 //Q_DECLARE_METATYPE(SeriesWrapper)
 #endif // SERIESWRAPPER_H

@@ -2,6 +2,9 @@
 #include "singlesetter.h"
 #include "ui_mainwindow.h"
 #include <QDebug>
+#include "catchgrapheditor.h"
+#include "fileexport.h"
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , serialPort(this)
@@ -91,4 +94,29 @@ void MainWindow::on_saveBtn_clicked()
 void MainWindow::on_motorsBtn_clicked()
 {
     this->motorsDialog.show();
+}
+
+void MainWindow::on_graphBtnLoad_clicked()
+{
+    QString name = "";
+    auto wrapper = FileExport::ImportSeries(*this, name, 1000, 0);
+    if(wrapper!=nullptr) {
+        auto dialog = new CatchGraphEditor(*wrapper, nullptr);
+        dialog->show();
+    } else qDebug()<<"Error while reading file.";
+}
+
+void MainWindow::on_aquireData_clicked()
+{
+
+}
+
+void MainWindow::on_graphBtn2Load_clicked()
+{
+    QString name = "";
+    auto wrapper = FileExport::ImportSeries(*this, name);
+    if(wrapper!=nullptr) {
+        auto dialog = new CatchGraphEditor(*wrapper, nullptr);
+        dialog->show();
+    } else qDebug()<<"Error while reading file.";
 }

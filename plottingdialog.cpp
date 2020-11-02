@@ -33,7 +33,7 @@ PlottingDialog::PlottingDialog(QWidget *parent) :
     m_chart->setTitle("Data");
     ui->chartLayout->addWidget(chartView);
     readSPTimer.setInterval(100);
-    connect(&readSPTimer, &QTimer::timeout, this, &PlottingDialog::handleReadSerial);
+    //connect(&readSPTimer, &QTimer::timeout, this, &PlottingDialog::handleReadSerial);
 
     cmdbtns<< new CMDBtn("/stear", ui->commandsWidget)<<
               new CMDBtn("/gyro", ui->commandsWidget)<<
@@ -94,10 +94,10 @@ void PlottingDialog::setVisible(bool visible)
     QDialog::setVisible(visible);
 }
 
-void PlottingDialog::setConnection(QSerialPort &sport)
+void PlottingDialog::setConnection(QSerialPort &sport, BackgroundSerialRead &reader)
 {
     port=&sport;
-
+    connect(&reader, &BackgroundSerialRead::dataAvailable, this, &PlottingDialog::handleReadSerialBG);
 }
 
 void PlottingDialog::forceStopPlotting() {
@@ -190,6 +190,43 @@ void PlottingDialog::handleReadSerial()
             }
         }
     }
+}
+
+void PlottingDialog::handleReadSerialBG(QByteArray newData)
+{
+    //if(isConnected() && port->bytesAvailable()>0){
+    //ui->textBrowser->append(port->readAll());
+    prevLeftData+=newData;
+    QStringList lines = prevLeftData.split("\n");
+    if(!lines.isEmpty()) {
+        QVector<QPointF> vals;
+        prevLeftData = lines.last();
+        for(int i=0; i<lines.count()-2; i++) {
+            QStringList values = lines.at(i).split(",");
+            if(values.count()>1) {
+                changeValuesCount(values.count());
+                if(xoffset==0) xoffset = values.at(0).toULong();
+                totalTimeStamp+=timeStamp;
+                vals.append(QPointF(totalTimeStamp, values.at(toShowValuesID).toDouble()));
+                if(fftOn) {
+                    fftCounter++;
+                    if(fftCounter>=fftCount) {
+                        series->add(values.at(toShowValuesID).toDouble());
+                        fftOn=false;
+                        fftCounter=0;
+                        auto editor = new CatchGraphEditor(*series);
+                        editor->show();
+                    } else {
+                        series->add(values.at(toShowValuesID).toDouble());
+                    }
+                }
+            }
+        }
+        if(vals.count()>0) {
+            addToGraph(vals);
+        }
+    }
+    //}
 
 }
 

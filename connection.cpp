@@ -6,8 +6,8 @@ Connection::Connection(QWidget *parent) :
     ui(new Ui::Connection)
 {
     ui->setupUi(this);
-    readSPTimer.setInterval(50);
-    connect(&readSPTimer, &QTimer::timeout, this, &Connection::handleReadSerial);
+    //readSPTimer.setInterval(500);
+    //connect(&readSPTimer, &QTimer::timeout, this, &Connection::handleReadSerial);
 }
 
 Connection::~Connection()
@@ -42,10 +42,10 @@ QSerialPort &Connection::getPort()
     return *port;
 }
 
-void Connection::setConnection(QSerialPort &sport)
+void Connection::setConnection(QSerialPort &sport, BackgroundSerialRead& reader)
 {
     port=&sport;
-
+    connect(&reader, &BackgroundSerialRead::dataAvailable, this, &Connection::handleReadSerialBG);
 }
 
 bool Connection::isConnected() {
@@ -58,6 +58,11 @@ void Connection::handleReadSerial()
     if(isConnected() && port->bytesAvailable()>0){
         ui->textBrowser->append(port->readAll());
     }
+}
+
+void Connection::handleReadSerialBG(QByteArray arr)
+{
+    ui->textBrowser->append(arr);
 }
 
 void Connection::on_pushButton_clicked()

@@ -1,6 +1,7 @@
 #ifndef PLOTTINGDIALOG_H
 #define PLOTTINGDIALOG_H
 
+#include "backgroundserialread.h"
 #include "cmdbtn.h"
 #include "fftdialog.h"
 #include "serieswrapper.h"
@@ -34,7 +35,7 @@ class PlottingDialog : public QDialog
     double yRangeLimit = 0;
     int valuesCount=0;
     int toShowValuesID=0;
-
+    QList<Filter<float>*> filters;
     QList<CMDBtn*> cmdbtns;
 
     double XRange=2;
@@ -52,6 +53,7 @@ public:
     explicit PlottingDialog(QWidget *parent = nullptr);
     ~PlottingDialog() override;
     bool isConnected();
+
 private:
     Ui::PlottingDialog *ui;
     void startT();
@@ -65,7 +67,7 @@ protected:
     void showEvent(QShowEvent *event) override;
 public slots:
     void addToGraph(const QVector<QPointF> &toAdd);
-    void setConnection(QSerialPort &sport);
+    void setConnection(QSerialPort &port, BackgroundSerialRead& reader);
 private slots:
     void handleReadSerial();
     void on_XRangeEdit_editingFinished();
@@ -74,6 +76,7 @@ private slots:
     void on_yRangeEdit_editingFinished();
     void on_selectItemCombo_currentIndexChanged(int index);
     void on_pushButton_clicked();
+    void handleReadSerialBG(QByteArray newData);
 };
 
 #endif // PLOTTINGDIALOG_H

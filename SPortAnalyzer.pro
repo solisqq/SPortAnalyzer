@@ -16,7 +16,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    aquiredatadialog.cpp \
+    backgroundserialread.cpp \
     catchgrapheditor.cpp \
+    catchgraphview.cpp \
     cmdbtn.cpp \
     connection.cpp \
     dialogs/exportseriesdialog.cpp \
@@ -37,7 +40,10 @@ SOURCES += \
 HEADERS += \
     Commands.h \
     Filter/Filter.h \
+    aquiredatadialog.h \
+    backgroundserialread.h \
     catchgrapheditor.h \
+    catchgraphview.h \
     cmdbtn.h \
     connection.h \
     dialogs/exportseriesdialog.h \
@@ -53,6 +59,7 @@ HEADERS += \
     fftdialog.h \
     fileexport.h \
     filters/BiquadBS.h \
+    filters/DynamicNotch.h \
     filters/fftwrapper.h \
     filtersetterdialog.h \
     floatviewsetter.h \
@@ -65,6 +72,7 @@ HEADERS += \
     xyseriesiodevice.h
 
 FORMS += \
+    aquiredatadialog.ui \
     catchgrapheditor.ui \
     cmdbtn.ui \
     connection.ui \

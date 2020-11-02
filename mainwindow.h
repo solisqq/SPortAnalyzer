@@ -31,6 +31,12 @@ private slots:
 
     void on_motorsBtn_clicked();
 
+    void on_graphBtnLoad_clicked();
+
+    void on_aquireData_clicked();
+
+    void on_graphBtn2Load_clicked();
+
 private:
     Ui::MainWindow *ui;
     void clearLayout(QLayout *layoutt);

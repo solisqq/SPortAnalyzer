@@ -4,6 +4,7 @@
 #include <dialogs/exportseriesdialog.h>
 #include <QDebug>
 #include <filters/BiquadBS.h>
+#include <filters/DynamicNotch.h>
 #include <filters/fftwrapper.h>
 
 using namespace QtCharts;
@@ -29,7 +30,7 @@ CatchGraphEditor::CatchGraphEditor(SeriesWrapper& initSeries, QWidget *parent) :
     chart->legend()->hide();
     chart->setTitle("Data");
 
-    xaxis->setTickCount(10);
+    xaxis->setTickCount(16);
     yaxis->setTickCount(3);
 
     chart->addAxis(xaxis, Qt::AlignBottom);
@@ -44,17 +45,18 @@ CatchGraphEditor::CatchGraphEditor(SeriesWrapper& initSeries, QWidget *parent) :
 
     ui->filtersComboBox->addItem("FFT");
     ui->filtersComboBox->addItem("NOTCH");
+    ui->filtersComboBox->addItem("DYNNOTCH");
 
     ui->filtersComboBox->setCurrentIndex(0);
-    connect(ui->refreshBtn, &QPushButton::clicked, this, &CatchGraphEditor::updateStaticRanges);
+    connect(ui->refreshBtn, &QPushButton::clicked, this, qOverload<>(&CatchGraphEditor::updateStaticRanges));
 }
+
 
 void CatchGraphEditor::updateStaticRanges() {
     staticRangeX = QPointF(std::numeric_limits<qreal>::max(), std::numeric_limits<qreal>::min());
     staticRangeY = QPointF(std::numeric_limits<qreal>::max(), std::numeric_limits<qreal>::min());
     for(auto wrapper : wrappers) {
         if(wrapper.second->isChecked()) {
-            qDebug()<<"test";//wrapper.first->getMinimum()<<wrapper.first->getMaximum()
             staticRangeX = QPointF(qMin(wrapper.first->getMinimum().x(), staticRangeX.x()), qMax(wrapper.first->getMaximum().x(), staticRangeX.y()));
             staticRangeY = QPointF(qMin(wrapper.first->getMinimum().y(), staticRangeY.x()), qMax(wrapper.first->getMaximum().y(), staticRangeY.y()));
         }
@@ -64,6 +66,10 @@ void CatchGraphEditor::updateStaticRanges() {
     setRangeValueFromSliders(false);
     //staticRangeX = QPointF(xaxis->min(),xaxis->max());
     //staticRangeY = QPointF(yaxis->min(),yaxis->max());
+}
+void CatchGraphEditor::updateStaticRanges(int fake) {
+    Q_UNUSED(fake)
+    updateStaticRanges();
 }
 
 void CatchGraphEditor::addSeries(SeriesWrapper& series, const QString& name, bool show) {
@@ -79,6 +85,7 @@ void CatchGraphEditor::addSeries(SeriesWrapper& series, const QString& name, boo
     wrappers.append(QPair<SeriesWrapper*, QCheckBox*>(&series, cb));
     if(show) {cb->setChecked(true); series.show();}
     connect(cb, &QCheckBox::stateChanged, &series, &SeriesWrapper::setState);
+    connect(cb, &QCheckBox::stateChanged, this, qOverload<int>(&CatchGraphEditor::updateStaticRanges));
     coloursCounter++;
     if(coloursCounter>=colorList.count()) coloursCounter=0;
     updateStaticRanges();
@@ -172,6 +179,10 @@ void CatchGraphEditor::on_addFilterBtn_clicked()
     }
     else if(ui->filtersComboBox->currentText()=="NOTCH") {
         auto dialog = new FilterSetterDialog(new BiquadBS<float>(1000, 100, 1,0));
+        connect(dialog, &FilterSetterDialog::filterSetUp, this, &CatchGraphEditor::addFilterSeries);
+        dialog->show();
+    } else if(ui->filtersComboBox->currentText()=="DYNNOTCH") {
+        auto dialog = new FilterSetterDialog(new DynamicNotch<float>(9, 1000, 500, 0, 132));
         connect(dialog, &FilterSetterDialog::filterSetUp, this, &CatchGraphEditor::addFilterSeries);
         dialog->show();
     }

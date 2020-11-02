@@ -150,8 +150,8 @@ QLineEdit::focus {
          </property>
          <property name="minimumSize">
           <size>
-           <width>48</width>
-           <height>48</height>
+           <width>56</width>
+           <height>56</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -169,8 +169,8 @@ QLineEdit::focus {
         <widget class="QPushButton" name="graphBtn">
          <property name="minimumSize">
           <size>
-           <width>48</width>
-           <height>48</height>
+           <width>56</width>
+           <height>56</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -188,8 +188,8 @@ QLineEdit::focus {
         <widget class="QPushButton" name="motorsBtn">
          <property name="minimumSize">
           <size>
-           <width>48</width>
-           <height>48</height>
+           <width>56</width>
+           <height>56</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -207,8 +207,8 @@ QLineEdit::focus {
         <widget class="QPushButton" name="saveBtn">
          <property name="minimumSize">
           <size>
-           <width>48</width>
-           <height>48</height>
+           <width>56</width>
+           <height>56</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -219,6 +219,75 @@ QLineEdit::focus {
          </property>
          <property name="text">
           <string>Save</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="graphBtnLoad">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>4</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>56</width>
+           <height>56</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>48</width>
+           <height>48</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>#G</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="graphBtn2Load">
+         <property name="minimumSize">
+          <size>
+           <width>56</width>
+           <height>56</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>56</width>
+           <height>56</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>#G2</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="aquireData">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>56</horstretch>
+           <verstretch>56</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>56</width>
+           <height>56</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>56</width>
+           <height>56</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>#AQ</string>
          </property>
         </widget>
        </item>
@@ -297,7 +366,7 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); border:0;}
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>397</width>
+                  <width>393</width>
                   <height>670</height>
                  </rect>
                 </property>
@@ -348,7 +417,7 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); border:0;}
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>396</width>
+                  <width>392</width>
                   <height>600</height>
                  </rect>
                 </property>
@@ -376,7 +445,7 @@ QScrollArea &gt; QWidget &gt; QScrollBar { background: palette(base); border:0;}
      <x>0</x>
      <y>0</y>
      <width>899</width>
-     <height>21</height>
+     <height>27</height>
     </rect>
    </property>
   </widget>

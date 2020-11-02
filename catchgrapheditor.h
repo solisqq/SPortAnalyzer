@@ -48,6 +48,7 @@ private slots:
 
     void on_addFilterBtn_clicked();
     void updateStaticRanges();
+    void updateStaticRanges(int fake);
     void addFilterSeries(Filter<float> *filter);
     void on_pushButton_clicked();
 

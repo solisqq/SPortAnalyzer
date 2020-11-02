@@ -64,7 +64,7 @@ SeriesWrapper::SeriesWrapper(std::function<float(float)> &func, QList<float> arg
         this->append(static_cast<qreal>(arg), val);
 
         maximum.setY(qMax(val, maximum.y()));
-        minimum.setY(qMin(val, maximum.y()));
+        minimum.setY(qMin(val, minimum.y()));
         maximum.setX(qMax(static_cast<qreal>(arg), maximum.x()));
         minimum.setX(qMin(static_cast<qreal>(arg), minimum.x()));
     }
@@ -152,6 +152,29 @@ void SeriesWrapper::setColour(const QColor &color)
     QPen pen(color);
     pen.setWidth(1);
     this->setPen(pen);
+}
+void SeriesWrapper::recalcLimits() {
+    minimum = QPointF(std::numeric_limits<qreal>::max(),std::numeric_limits<qreal>::max());
+    maximum = QPointF(std::numeric_limits<qreal>::min(), std::numeric_limits<qreal>::min());
+    for(int i=0; i<this->count(); i++){
+        if(points()[i].y()>maximum.y())
+            maximum.setY(points()[i].y());
+        else if(points()[i].y()<minimum.y())
+            minimum.setY(points()[i].y());
+
+        if(points()[i].x()>maximum.x())
+            maximum.setX(points()[i].x());
+        else if(points()[i].x()<minimum.x())
+            minimum.setX(points()[i].x());
+    }
+}
+void SeriesWrapper::resizeToFitFFT()
+{
+    int j, i=this->count();
+    for(j=2; j<i; j = j*2) {}
+    if(j>i) j=j/2;
+    while(i>j) {this->remove(j);i--;}
+    recalcLimits();
 }
 
 void SeriesWrapper::show()

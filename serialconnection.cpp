@@ -11,6 +11,7 @@ SerialConnection::SerialConnection(QWidget *parent) :
 {
     ui->setupUi(this);
     port.setBaudRate(500000);
+    port.setReadBufferSize(8500);
     port.setDataBits(QSerialPort::Data8);
     port.setParity(QSerialPort::NoParity);
     port.setStopBits(QSerialPort::OneStop);
@@ -39,7 +40,9 @@ void SerialConnection::on_comboBox_currentIndexChanged(const QString &arg1)
     if(port.open(QIODevice::ReadWrite)){
         ui->checkBox->setChecked(true);
         getSettings();
-        emit(connected(port));
+        readBG = new BackgroundSerialRead(port, 1000);
+        //connect(readBG, &BackgroundSerialRead::dataAvailable, this, &Connection::handleReadSerialBG);
+        connect(readBG, &BackgroundSerialRead::finished, this, &QObject::deleteLater);
         ui->pushButton->show();
     } else {
         ui->checkBox->setChecked(false);
@@ -50,6 +53,8 @@ void SerialConnection::on_comboBox_currentIndexChanged(const QString &arg1)
 void SerialConnection::readSettings()
 {
     emit(settingsReady(QString::fromUtf8(port.readAll()).split("\n")));
+    emit(connected(port, *readBG));
+    readBG->start();
 }
 
 void SerialConnection::write(const QString& val) {
